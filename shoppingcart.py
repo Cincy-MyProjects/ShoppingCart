@@ -66,56 +66,56 @@ class ShoppingCart:
             print(f"{item.item_name}: {item.item_description}")
 
 def print_menu(cart):
+    print("\nMENU")
+    print("a - Add item to cart")
+    print("r - Remove item from cart")
+    print("c - Change item quantity")
+    print("i - Output items' descriptions")
+    print("o - Output shopping cart")
+    print("q - Quit")
     while True:
-        print("\nMENU")
-        print("a - Add item to cart")
-        print("r - Remove item from cart")
-        print("c - Change item quantity")
-        print("i - Output items' descriptions")
-        print("o - Output shopping cart")
-        print("q - Quit")
         choice = input("Choose an option:\n")
-
         if choice == 'a':
-            print("ADD ITEM TO CART")
-            name = input("Enter the item name:\n")
-            description = input("Enter the item description:\n")
-            price = float(input("Enter the item price:\n"))
-            quantity = int(input("Enter the item quantity:\n"))
-            item = ItemToPurchase(name, description, price, quantity)
-            cart.add_item(item)
-
+            add_item_to_cart(cart)
         elif choice == 'r':
-            print("REMOVE ITEM FROM CART")
-            name = input("Enter name of item to remove:\n")
-            cart.remove_item(name)
-
+            remove_item_from_cart(cart)
         elif choice == 'c':
-            print("CHANGE ITEM QUANTITY")
-            name = input("Enter the item name:\n")
-            description = input("Enter the item description (leave blank if no change):\n")
-            price = input("Enter the item price (leave blank if no change):\n")
-            quantity = input("Enter the item quantity (leave blank if no change):\n")
-            description = description if description else "none"
-            price = float(price) if price else 0.0
-            quantity = int(quantity) if quantity else 0
-            modified_item = ItemToPurchase(name, description, price, quantity)
-            cart.modify_item(modified_item)
-
+            change_item_quantity(cart)
         elif choice == 'i':
             print("OUTPUT ITEMS' DESCRIPTIONS")
             cart.print_descriptions()
-
         elif choice == 'o':
             print("OUTPUT SHOPPING CART")
             cart.print_total()
-
         elif choice == 'q':
             break
-
         else:
             print("Invalid option. Please try again.")
 
+def add_item_to_cart(cart):
+    print("ADD ITEM TO CART")
+    name = input("Enter the item name:\n")
+    description = input("Enter the item description:\n")
+    price = float(input("Enter the item price:\n"))
+    quantity = int(input("Enter the item quantity:\n"))
+    item = ItemToPurchase(name, description, price, quantity)
+    cart.add_item(item)
+
+def remove_item_from_cart(cart):
+    print("REMOVE ITEM FROM CART")
+    name = input("Enter name of item to remove:\n")
+    cart.remove_item(name)
+def change_item_quantity(cart):
+    print("CHANGE ITEM QUANTITY")
+    name = input("Enter the item name:\n")
+    description = input("Enter the item description (leave blank if no change):\n")
+    price = input("Enter the item price (leave blank if no change):\n")
+    quantity = input("Enter the item quantity (leave blank if no change):\n")
+    description = description if description else "none"
+    price = float(price) if price else 0.0
+    quantity = int(quantity) if quantity else 0
+    modified_item = ItemToPurchase(name, description, price, quantity)
+    cart.modify_item(modified_item)
 def main():
     customer_name = input("Enter customer's name:\n")
     current_date = input("Enter today's date:\n")
